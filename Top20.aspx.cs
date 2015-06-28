@@ -17,15 +17,15 @@ public partial class Top20 : System.Web.UI.Page
         using (Npgsql.NpgsqlConnection connection = new Npgsql.NpgsqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]))
         {
             connection.Open();
-            String best = "SELECT title, vote_average FROM movie LIMIT 20";
-            NpgsqlDataAdapter da = new NpgsqlDataAdapter(best, connection);
+            String chart_select = "SELECT title, vote_average FROM movie LIMIT 20";
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(chart_select, connection);
+            connection.Close();
+
             ds.Reset();
             da.Fill(ds);
             dt = ds.Tables[0];
-            int d = dt.Rows.Count;
             GridView1.DataSource = dt;
-            GridView1.DataBind();
-            connection.Close();       
+            GridView1.DataBind();               
         }
 
     }
