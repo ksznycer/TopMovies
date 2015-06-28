@@ -29,7 +29,7 @@ public partial class Search : System.Web.UI.Page
         GridView1.DataSource = null;
         GridView1.DataBind();
 
-        if (Regex.IsMatch(TextBox1.Text, @"[A-Za-z]+$") && Regex.IsMatch(TextBox2.Text, @"[0-9]\.[0-9]*$"))
+        if (Regex.IsMatch(TextBox1.Text, @"[A-Za-z]+$") && (Regex.IsMatch(TextBox2.Text, @"[0-9]\.[0-9]*$") || Regex.IsMatch(TextBox2.Text, @"[0-9]+$")))
         {
             String text = TextBox1.Text.ToLower();
             char[] text2 = text.ToCharArray();
