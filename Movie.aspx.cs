@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Configuration;
 using Npgsql;
 using System.Data;
+using IMDb_Scraper;
 
 /*******************************************************************************
  * Free ASP.net IMDb Scraper API for the new IMDb Template.
@@ -261,6 +262,10 @@ public partial class Movie : System.Web.UI.Page
             String chart_select = "SELECT title FROM movie WHERE id = " + a;
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(chart_select, connection);
             connection.Close();
+
+            IMDb imdb = new IMDb("The Godfather", true);
+            String tittl = imdb.Id;
+            Label1.Text = Label1.Text + imdb.Title;
         }
 
     }
