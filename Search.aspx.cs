@@ -48,7 +48,7 @@ public partial class Search : System.Web.UI.Page
         using (Npgsql.NpgsqlConnection connection = new Npgsql.NpgsqlConnection(ConfigurationSettings.AppSettings["ConnectionString"]))
         {
             connection.Open();
-            String search = "SELECT a.title FROM movie AS a JOIN movie_genre AS b ON a.id = b.movie_id AND b.genre_id IN(SELECT id FROM genre WHERE name = '" + TextBox1.Text + "') AND a.vote_average > " + TextBox2.Text + " GROUP BY a.title";
+            String search = "SELECT a.title, a.vote_average FROM movie AS a JOIN movie_genre AS b ON a.id = b.movie_id AND b.genre_id IN(SELECT id FROM genre WHERE name = '" + TextBox1.Text + "') AND a.vote_average > " + TextBox2.Text + " GROUP BY a.title, a.vote_average ORDER BY a.vote_average DESC";
             NpgsqlDataAdapter da = new NpgsqlDataAdapter(search, connection);
             connection.Close();
 
